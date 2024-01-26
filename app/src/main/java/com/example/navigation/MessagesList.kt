@@ -31,6 +31,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.animateContentSize
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
+import androidx.compose.ui.Alignment
 import com.example.navigation.ui.theme.NavigationTheme
 
 class MessagesList : ComponentActivity() {
@@ -38,13 +46,37 @@ class MessagesList : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             NavigationTheme {
-                Conversation(SampleData.conversationSample)
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                ) {
+                    NavBar()
+                    Conversation(SampleData.conversationSample)
+                }
             }
         }
     }
 }
 
 data class Message(val author: String, val body: String)
+
+@Composable
+fun NavBar() {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(50.dp),
+        contentAlignment = Alignment.CenterEnd
+    ) {
+        Button(
+            onClick = { /*TODO*/ },
+            modifier = Modifier.width(100.dp),
+        ) {
+            Icon(imageVector = Icons.Default.Settings, contentDescription = "Settings")
+        }
+    }
+
+}
 
 @Composable
 fun MessageCard(msg: Message) {
@@ -113,14 +145,21 @@ fun Conversation(messages: List<Message>) {
     }
 }
 
+@Composable
+fun MessagesListPreview() {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+    ) {
+        NavBar()
+        Conversation(SampleData.conversationSample)
+    }
+}
+
 @Preview
 @Composable
 fun PreviewConversation() {
     NavigationTheme {
-        Row {
-            Conversation(SampleData.conversationSample)
-            UserDetails()
-        }
-
+        MessagesListPreview()
     }
 }

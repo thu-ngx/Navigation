@@ -6,27 +6,40 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.rounded.ArrowBack
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.navigation.ui.theme.NavigationTheme
 
 class UserDetails : ComponentActivity() {
@@ -34,21 +47,44 @@ class UserDetails : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             NavigationTheme {
-                NavigationBar()
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                ) {
+                    NavigationBar()
+                    Spacer(modifier = Modifier.height(80.dp))
+                    UserInfo()
+                }
             }
         }
+    }
+}
+
+@Composable
+fun UserDetailsPreview() {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+    ) {
+        NavigationBar()
+        Spacer(modifier = Modifier.height(80.dp))
+        UserInfo()
     }
 }
 
 
 @Composable
 fun UserInfo() {
-    Column {
+    Column(
+        modifier = Modifier.fillMaxWidth(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
         Image(
             painter = painterResource(R.drawable.profile_picture),
             contentDescription = null,
             modifier = Modifier
-                .size(70.dp)
+                .size(150.dp)
                 .clip(CircleShape)
                 .border(1.5.dp, MaterialTheme.colorScheme.secondary, CircleShape)
         )
@@ -56,9 +92,10 @@ fun UserInfo() {
         Spacer(modifier = Modifier.width(20.dp))
 
         Text(
-            text = "Back",
+            text = "Nguyen",
             color = MaterialTheme.colorScheme.primary,
-            style = MaterialTheme.typography.titleLarge,
+            fontSize = 40.sp,
+            fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(5.dp)
         )
     }
@@ -69,41 +106,31 @@ fun UserInfo() {
 
 @Composable
 fun NavigationBar() {
-    Surface(
-        shape = MaterialTheme.shapes.medium,
-        shadowElevation = 1.dp,
-        color = MaterialTheme.colorScheme.surface,
-        modifier = Modifier.width(100.dp)
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(50.dp),
+        contentAlignment = Alignment.CenterStart
     ) {
-//        Icon(
-//            Icons.Rounded.ArrowBack,
-//            contentDescription = stringResource(id = R.string.arrow_back_content_desc)
-//        )
         BackButton()
     }
 }
 
+
 @Composable
 fun BackButton() {
-    Surface(
+    Button(
         onClick = { /*TODO*/ },
-        shape = MaterialTheme.shapes.medium,
-        shadowElevation = 1.dp,
-        color = MaterialTheme.colorScheme.surface,
+        modifier = Modifier.width(100.dp),
     ) {
-        Text(
-            text = "Back",
-            color = MaterialTheme.colorScheme.primary,
-            style = MaterialTheme.typography.titleSmall,
-            modifier = Modifier.padding(5.dp)
-        )
+        Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Back")
     }
 }
 
 @Preview
 @Composable
-fun PreviewBackButton() {
+fun Preview() {
     NavigationTheme {
-        UserInfo()
+        UserDetailsPreview()
     }
 }
