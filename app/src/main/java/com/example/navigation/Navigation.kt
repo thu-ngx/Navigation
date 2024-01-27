@@ -21,12 +21,19 @@ fun MyAppNavHost(
         composable("messageslist") {
             MessagesListScreen(
                 onNavigateToUserDetails = { navController.navigate("userdetails") },
-                /*...*/
             )
         }
-        composable("userdetails") { UserDetailsScreen(
-            onNavigateToMessagesList = { navController.navigate("messageslist") },
-            /*...*/) }
+        composable("userdetails") {
+            UserDetailsScreen(
+                onNavigateToMessagesList = {
+                    navController.navigate("messageslist") {
+                        popUpTo("messageslist") {
+                            inclusive = true
+                        }
+                    }
+                },
+            )
+        }
     }
 }
 
