@@ -42,29 +42,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.navigation.ui.theme.NavigationTheme
 
-class UserDetails : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            NavigationTheme {
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                ) {
-                    NavigationBar()
-                    Spacer(modifier = Modifier.height(80.dp))
-                    UserInfo()
-                }
-            }
-        }
-    }
-}
-
 @Composable
-fun UserDetailsPreview() {
+fun UserDetailsScreen() {
     Column(
         modifier = Modifier
             .fillMaxWidth()
+            .padding(20.dp)
     ) {
         NavigationBar()
         Spacer(modifier = Modifier.height(80.dp))
@@ -131,6 +114,6 @@ fun BackButton() {
 @Composable
 fun Preview() {
     NavigationTheme {
-        UserDetailsPreview()
+        UserDetailsScreen()
     }
 }

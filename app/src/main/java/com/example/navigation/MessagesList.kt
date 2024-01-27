@@ -41,20 +41,15 @@ import androidx.compose.material3.Icon
 import androidx.compose.ui.Alignment
 import com.example.navigation.ui.theme.NavigationTheme
 
-class MessagesList : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            NavigationTheme {
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                ) {
-                    NavBar()
-                    Conversation(SampleData.conversationSample)
-                }
-            }
-        }
+@Composable
+fun MessagesListScreen() {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(20.dp)
+    ) {
+        NavBar()
+        Conversation(SampleData.conversationSample)
     }
 }
 
@@ -145,21 +140,10 @@ fun Conversation(messages: List<Message>) {
     }
 }
 
-@Composable
-fun MessagesListPreview() {
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-    ) {
-        NavBar()
-        Conversation(SampleData.conversationSample)
-    }
-}
-
 @Preview
 @Composable
 fun PreviewConversation() {
     NavigationTheme {
-        MessagesListPreview()
+        MessagesListScreen()
     }
 }

@@ -17,10 +17,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             NavigationTheme {
-                Column(
-                    modifier = Modifier.fillMaxSize()
-                ) {
-                    UserDetails()
+                Column (modifier = Modifier.fillMaxSize()) {
+                    MessagesListScreen()
+//                    UserDetailsScreen()
                 }
             }
         }
