@@ -29,6 +29,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -43,13 +44,13 @@ import androidx.compose.ui.unit.sp
 import com.example.navigation.ui.theme.NavigationTheme
 
 @Composable
-fun UserDetailsScreen() {
+fun UserDetails(onNavigateToMessagesList: () -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .padding(20.dp)
     ) {
-        NavigationBar()
+        NavigationBar(onNavigateToMessagesList)
         Spacer(modifier = Modifier.height(80.dp))
         UserInfo()
     }
@@ -74,12 +75,17 @@ fun UserInfo() {
 
         Spacer(modifier = Modifier.width(20.dp))
 
-        Text(
-            text = "Nguyen",
-            color = MaterialTheme.colorScheme.primary,
-            fontSize = 40.sp,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(5.dp)
+//        Text(
+//            text = "Nguyen",
+//            color = MaterialTheme.colorScheme.primary,
+//            fontSize = 40.sp,
+//            fontWeight = FontWeight.Bold,
+//            modifier = Modifier.padding(5.dp)
+//        )
+
+        TextField(
+            value = "Thu", onValueChange = {},
+            modifier = Modifier.padding(vertical = 30.dp)
         )
     }
 
@@ -88,22 +94,21 @@ fun UserInfo() {
 
 
 @Composable
-fun NavigationBar() {
+fun NavigationBar(onNavigateToMessagesList: () -> Unit) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(50.dp),
-        contentAlignment = Alignment.CenterStart
+            .height(50.dp), contentAlignment = Alignment.CenterStart
     ) {
-        BackButton()
+        BackButton(onNavigateToMessagesList)
     }
 }
 
 
 @Composable
-fun BackButton() {
+fun BackButton(onNavigateToMessagesList: () -> Unit) {
     Button(
-        onClick = { /*TODO*/ },
+        onClick = onNavigateToMessagesList,
         modifier = Modifier.width(100.dp),
     ) {
         Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Back")
@@ -114,6 +119,6 @@ fun BackButton() {
 @Composable
 fun Preview() {
     NavigationTheme {
-        UserDetailsScreen()
+        UserDetails({})
     }
 }

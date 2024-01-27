@@ -1,11 +1,8 @@
 package com.example.navigation
 
-import androidx.activity.compose.setContent
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import android.os.Bundle
-import androidx.activity.ComponentActivity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -34,7 +31,6 @@ import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
@@ -42,13 +38,13 @@ import androidx.compose.ui.Alignment
 import com.example.navigation.ui.theme.NavigationTheme
 
 @Composable
-fun MessagesListScreen() {
+fun MessagesList(onNavigateToUserDetails: () -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .padding(20.dp)
     ) {
-        NavBar()
+        NavBar(onNavigateToUserDetails)
         Conversation(SampleData.conversationSample)
     }
 }
@@ -56,7 +52,7 @@ fun MessagesListScreen() {
 data class Message(val author: String, val body: String)
 
 @Composable
-fun NavBar() {
+fun NavBar(onNavigateToUserDetails: () -> Unit) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -64,7 +60,7 @@ fun NavBar() {
         contentAlignment = Alignment.CenterEnd
     ) {
         Button(
-            onClick = { /*TODO*/ },
+            onClick = onNavigateToUserDetails,
             modifier = Modifier.width(100.dp),
         ) {
             Icon(imageVector = Icons.Default.Settings, contentDescription = "Settings")
@@ -144,6 +140,6 @@ fun Conversation(messages: List<Message>) {
 @Composable
 fun PreviewConversation() {
     NavigationTheme {
-        MessagesListScreen()
+        MessagesList({})
     }
 }
